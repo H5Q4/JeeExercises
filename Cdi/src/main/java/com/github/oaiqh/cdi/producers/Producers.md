@@ -54,8 +54,45 @@ __InjectionPoint__ api can help us.
 We need to create a producer method that takes an InjectionPoint class as its parameter.
 
 ```java
-
+public class LoggerProducer {
+  @Produces
+  private Logger createLogger(InjectionPoint point) {
+    return Logger.getLogger(point.getMember().getDeclaringClass().getCanonicalName());
+  }
+}
 ``` 
+
+#### Disposes
+
+Some producer methods return objects that require explicit destruction such as JDBC connection. CDI
+uses disposers for destruction.
+
+#### How to Use
+
+Write a method which has a same type corresponding producer method return type and qualifies, Annotate `@Disposes`
+to that parameter.
+
+```java
+public class JdbcConnectionProducer {
+  @Produces
+  private Connection createConnection() {
+    Connection connection = null;
+    try {
+      Class.forName("org.h2.Driver");
+      connection = DriverManager.getConnection("jdbc:h2:mem:test_mem", "sa", "");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return connection;
+  }
+
+  private void closeConnection(@Disposes Connection connection) throws SQLException {
+    connection.close();
+  }
+}
+```
 
 
 

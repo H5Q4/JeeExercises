@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,8 @@
   <packaging>pom</packaging>
 
   <properties>
-    <version.java>1.8</version.java>
+    <version.maven.compiler.target>1.8</version.maven.compiler.target>
+    <version.maven.compiler.source>1.8</version.maven.compiler.source>
     <version.junit5>5.4.2</version.junit5>
     <version.h2>1.4.199</version.h2>
     <!--JEE-->
@@ -23,6 +24,13 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se-core -->
+      <dependency>
+        <groupId>org.jboss.weld.se</groupId>
+        <artifactId>weld-se-core</artifactId>
+        <version>${version.weld}</version>
+      </dependency>
+
       <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -42,4 +50,21 @@
     </dependencies>
 
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${version.maven.compiler.plugin}</version>
+          <inherited>true</inherited>
+          <configuration>
+            <source>${version.maven.compiler.source}</source>
+            <target>${version.maven.compiler.target}</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
