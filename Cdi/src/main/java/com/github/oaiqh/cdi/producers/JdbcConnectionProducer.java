@@ -13,9 +13,7 @@ public class JdbcConnectionProducer {
     try {
       Class.forName("org.h2.Driver");
       connection = DriverManager.getConnection("jdbc:h2:mem:test_mem", "sa", "");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    } catch (SQLException e) {
+    } catch (ClassNotFoundException | SQLException e) {
       e.printStackTrace();
     }
     return connection;

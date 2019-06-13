@@ -75,5 +75,21 @@ for injection.
 
 ```java
 // Create another qualifier
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+public @interface TenDigits {
+}
 
+public class BookService {
+
+  @Inject @ISBN @TenDigits
+  private ISBNGenerator isbnGenerator;
+
+  public Book createBook(String title) {
+    Book book = new Book();
+    book.setIsbn(isbnGenerator.generate());
+    return book;
+  }
+}
 ```
