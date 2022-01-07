@@ -16,7 +16,7 @@
     <version.maven.compiler.target>1.8</version.maven.compiler.target>
     <version.maven.compiler.source>1.8</version.maven.compiler.source>
     <version.junit5>5.4.2</version.junit5>
-    <version.h2>1.4.199</version.h2>
+    <version.h2>2.0.206</version.h2>
     <!--JEE-->
     <version.jee>8.0</version.jee>
     <version.weld>3.1.1.Final</version.weld>
